@@ -1,9 +1,17 @@
-FROM php:8.2-cli
+FROM php:7.4-cli
 
 WORKDIR /app
 
 # Extensiones necesarias para Booked (MySQL)
 RUN docker-php-ext-install mysqli pdo pdo_mysql
+
+# Ajustes PHP para produccion: ocultar warnings/deprecations en pantalla
+RUN { \
+  echo 'display_errors=Off'; \
+  echo 'display_startup_errors=Off'; \
+  echo 'log_errors=On'; \
+  echo 'error_reporting=E_ALL & ~E_DEPRECATED & ~E_NOTICE & ~E_WARNING'; \
+} > /usr/local/etc/php/conf.d/booked-runtime.ini
 
 COPY . /app
 
