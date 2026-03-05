@@ -15,4 +15,4 @@ RUN mkdir -p /app/tpl_c /app/uploads /app/config \
   && chmod -R 777 /app/tpl_c /app/uploads /app/config
 
 # Render inyecta PORT; fallback local 10000
-CMD ["sh", "-c", "php -S 0.0.0.0:${PORT:-10000} -t /app"]
+CMD ["sh", "-c", "cd /app/Web \&\& php -S 0.0.0.0: -t /app/Web"]
