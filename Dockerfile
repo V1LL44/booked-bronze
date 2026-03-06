@@ -15,8 +15,10 @@ RUN { \
 
 COPY . /app
 
-# Si no existe config.php (normal en repo limpio), crearlo desde dist
-RUN [ -f /app/config/config.php ] || cp /app/config/config.dist.php /app/config/config.php
+# Crear config.php desde dist y ajustar valores de instalacion para Render
+RUN cp /app/config/config.dist.php /app/config/config.php \
+  && sed -i "s#\\$conf\\['settings'\\]\\['script.url'\\] = '.*';#\\$conf['settings']['script.url'] = 'https://booked-bronze.onrender.com/';#" /app/config/config.php \
+  && sed -i "s#\\$conf\\['settings'\\]\\['install.password'\\] = '.*';#\\$conf['settings']['install.password'] = 'BronzeInstall2026!';#" /app/config/config.php
 
 # Directorios que Booked necesita con escritura durante instalacion
 RUN mkdir -p /app/tpl_c /app/uploads /app/config \
