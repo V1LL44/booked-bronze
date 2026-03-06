@@ -138,7 +138,7 @@ $conf['settings']['plugins']['PostReservation'] = '';
 /**
  * Installation settings
  */
-$conf['settings']['install.password'] = '';
+$conf['settings']['install.password'] = 'BronzeInstall2026!';
 /**
  * Pages
  */
